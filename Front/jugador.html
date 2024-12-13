@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Jugadores</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body style="height: 100vh;">
+
+     <!-- Barra de navegación -->
+     <div id="BarNav" style="margin-bottom: 0px;">
+
+        <a class="nav-link active" aria-current="page" href="../api/">
+            <span>API</span>    
+            <div class="liquid"></div>
+        </a>
+
+    
+        <a class="nav-link active" aria-current="page" href="/jugador/">
+            <span>JUGADORES</span>    
+            <div class="liquid"></div>
+        </a>
+    
+        <a class="nav-link" href="/dt/">
+            <span>DT</span>
+            <div class="liquid"></div>
+        </a>
+    
+    
+        <a class="nav-link" href="/equipo/">
+            <span>EQUIPOS</span>
+            <div class="liquid"></div>
+        </a>
+
+
+        <a class="nav-link" href="/admin">
+            <span>INTRANET</span>
+            <div class="liquid"></div>
+        </a>
+
+
+
+    </div>
+
+
+    <div style="margin-top: 0px;">
+        <!-- Botón para abrir el modal de agregar jugador -->
+        <section id="add-player" class="mb-5">
+            <h2>Añadir Jugador</h2>
+            <!-- Botón que abre el modal -->
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddJugador">Agregar Jugador</button>
+        </section>
+
+        <!-- Sección para listar jugadores -->
+        <section id="player-table" class="mb-5">
+            <h2>Tabla de Jugadores</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>PPP</th>
+                        <th>Eficacia</th>
+                        <th>Posición</th>
+                        <th>Edad</th>
+                        <th>Campeonatos</th>
+                        <th>Equipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="player-table-body">
+                    <!-- Los jugadores se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Modal para Agregar Jugador -->
+        <div class="modal fade" id="modalAddJugador" tabindex="-1" aria-labelledby="modalAddJugadorLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAddJugadorLabel">Agregar Jugador</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addJugadorForm">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ppp" class="form-label">Puntos por Partido</label>
+                                <input type="number" class="form-control" id="ppp" step="0.1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="eficacia" class="form-label">Eficacia</label>
+                                <input type="number" class="form-control" id="eficacia" step="0.1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="posicion" class="form-label">Posición</label>
+                                <select class="form-select" id="posicion" required>
+                                    <option value="Ala-pivot">Ala-pivot</option>
+                                    <option value="Base">Base</option>
+                                    <option value="Escolta">Escolta</option>
+                                    <option value="Pivot">Pivot</option>
+                                    <option value="Alero">Alero</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edad" class="form-label">Edad</label>
+                                <input type="number" class="form-control" id="edad" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="campeonatos" class="form-label">Campeonatos</label>
+                                <input type="number" class="form-control" id="campeonatos" required>
+                            </div>
+                            <div>
+                                <label for="equipo">Equipo:</label>
+                                <select class="form-select mb-3" id="equipo" name="equipo">
+                                    <option value="">Seleccione un equipo</option>
+                                    <!-- Aquí irán los equipos cargados dinámicamente -->
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Jugador</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Modificar Jugador -->
+        <div class="modal fade" id="modalEditJugador" tabindex="-1" aria-labelledby="modalEditJugadorLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditJugadorLabel">Modificar Jugador</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editJugadorForm">
+                            <div class="mb-3">
+                                <label for="editNombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="editNombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editApellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="editApellido" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPpp" class="form-label">Puntos por Partido</label>
+                                <input type="number" class="form-control" id="editPpp" step="0.1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEficacia" class="form-label">Eficacia</label>
+                                <input type="number" class="form-control" id="editEficacia" step="0.1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPosicion" class="form-label">Posición</label>
+                                <select class="form-select" id="editPosicion" required>
+                                    <option value="Ala-pivot">Ala-pivot</option>
+                                    <option value="Base">Base</option>
+                                    <option value="Escolta">Escolta</option>
+                                    <option value="Pivot">Pivot</option>
+                                    <option value="Alero">Alero</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEdad" class="form-label">Edad</label>
+                                <input type="number" class="form-control" id="editEdad" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editCampeonatos" class="form-label">Campeonatos</label>
+                                <input type="number" class="form-control" id="editCampeonatos" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="equipo">Equipo:</label>
+                                <select class="form-select mb-3" id="editEquipo" name="equipo">
+                                    <option value="">Seleccione un equipo</option>
+                                    <!-- Aquí irán los equipos cargados dinámicamente -->
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class=" text-center py-3 mt-5" style="display: g;">
+        <p>&copy; 2024 Sistema de Gestión de Jugadores. Todos los derechos reservados.</p>
+        <p id="Autores">Desarrollado por Matias Rojas & Luciano Berrios</p>
+    </footer>
+    <script src="{% static 'js/jugador.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

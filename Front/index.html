@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+
+<body style="height: 100vh;">
+
+    <!-- Barra de navegación -->
+    <div id="BarNav">
+
+        <a class="nav-link active" aria-current="page" href="api/">
+            <span>API</span>    
+            <div class="liquid"></div>
+        </a>
+
+    
+        <a class="nav-link active" aria-current="page" href="/jugador/">
+            <span>JUGADORES</span>    
+            <div class="liquid"></div>
+        </a>
+    
+        <a class="nav-link" href="/dt/">
+            <span>DT</span>
+            <div class="liquid"></div>
+        </a>
+    
+    
+        <a class="nav-link" href="/equipo/">
+            <span>EQUIPOS</span>
+            <div class="liquid"></div>
+        </a>
+
+
+        <a class="nav-link" href="/admin">
+            <span>INTRANET</span>
+            <div class="liquid"></div>
+        </a>
+
+
+
+    </div>
+        
+    <div style="margin-top: 50px;">
+
+        <div class="container">
+            <div class="card">
+                <img src="{% static 'img/5.jpg' %}"  alt="Imagen 1">
+            </div>
+            <div class="card">
+                <img src="{% static 'img/1.jpg' %}"  alt="Imagen 1">
+            </div>
+            <div class="card">
+                <img src="{% static 'img/3.jpg' %}"  alt="Imagen 1">
+            </div>
+            <div class="card">
+                <img src="{% static 'img/2.jpg' %}"  alt="Imagen 1">
+            </div>
+            <div class="card">
+                <img src="{% static 'img/4.jpg' %}"  alt="Imagen 1">
+            </div>
+          </div>
+
+
+
+
+    </div>
+    
+    </div>
+
+    <!-- Footer -->
+    <footer class=" text-center py-3 mt-5" style="display: g;">
+        <p>&copy; 2024 Sistema de Gestión de Jugadores. Todos los derechos reservados.</p>
+        <p id="Autores">Desarrollado por Matias Rojas & Luciano Berrios</p>
+    </footer>
+
+</body>
+
+</html>
